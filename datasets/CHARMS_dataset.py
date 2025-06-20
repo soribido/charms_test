@@ -139,8 +139,9 @@ class PetFinderConCatImageDataset(Dataset):
                                  std=[0.229, 0.224, 0.225])])
 
         self.table_df = pd.read_csv(self.table_path)
-        self.con_cols = ['Age', 'Quantity', 'Fee', 'VideoAmt', 'PhotoAmt', 'desc_length', 'average_word_length',
-                         'magnitude', 'desc_words', 'score']
+        # self.con_cols = ['Age', 'Quantity', 'Fee', 'VideoAmt', 'PhotoAmt', 'desc_length', 'average_word_length',
+        #                  'magnitude', 'desc_words', 'score']
+        self.con_cols = ['Age', 'Quantity', 'Fee', 'VideoAmt', 'PhotoAmt']
         self.cat_cols = ['Type', 'Breed1', 'Breed2', 'Gender', 'Color1', 'Color2',
                     'Color3', 'MaturitySize', 'FurLength', 'Vaccinated', 'Dewormed',
                     'Sterilized', 'Health', 'State']

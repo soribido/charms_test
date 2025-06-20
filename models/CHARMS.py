@@ -226,6 +226,7 @@ class ImageClassifier(nn.Module):
         kmeans = KMeans(n_clusters=self.img_reduction_dim, random_state=0, n_init="auto").fit(tar_x)
         channel_feat_cluster = torch.tensor(kmeans.cluster_centers_, dtype=torch.float)
         tar_x = kmeans.cluster_centers_.reshape((self.img_reduction_dim, -1, img_embed))
+        os.makedirs('res_tmp',exist_ok=True)
         with open('res_tmp/cluster_centering_.txt', mode='w') as f:
             for i in range(self.img_reduction_dim):
                 f.write(str(tar_x[i]) + '\n')
@@ -267,10 +268,12 @@ class ImageModelPetFinderWithRTDL(pl.LightningModule):
         self.img_reduction_dim = img_reduction_dim
         self.valid_loader = self.val_dataloader()
         self.loss_weight_dict = {'con_loss': 0.03, 'cat_loss': 0.03, 'tab_loss': 0.6, 'img_loss': 1}
-
+        
     def val_dataloader(self):
-        valid_dataset = PetFinderConCatImageDataset("/data/jiangjp/PetFinder_datasets/dataset/petfinder_adoptionprediction/dataset_valid.csv",
-                                                    "/data/jiangjp/PetFinder_datasets/raw_dataset/petfinder_adoptionprediction/train_images")
+        # valid_dataset = PetFinderConCatImageDataset("/data/jiangjp/PetFinder_datasets/dataset/petfinder_adoptionprediction/dataset_valid.csv",
+        #                                             "/data/jiangjp/PetFinder_datasets/raw_dataset/petfinder_adoptionprediction/train_images")
+        valid_dataset = PetFinderConCatImageDataset("/ati/test/jupyter/jupyter-kang/data/petfinder/dataset_valid.csv",
+                                                    "/ati/test/jupyter/jupyter-kang/data/petfinder/train_images")
         valid_loader = DataLoader(valid_dataset, batch_size=32, num_workers=8, shuffle=False)
         return valid_loader
 

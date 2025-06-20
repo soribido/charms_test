@@ -232,8 +232,9 @@ class ContrastiveImagingAndTabularDataset_PetFinder(ContrastiveImagingAndTabular
         """
         data = pd.read_csv(path_tabular)
         data = data.drop(index=data[(data.PhotoAmt == 0.0)].index.tolist())
-        con_cols = ['Age', 'Quantity', 'Fee', 'VideoAmt', 'PhotoAmt', 'desc_length', 'average_word_length',
-                    'magnitude', 'desc_words', 'score']
+        # con_cols = ['Age', 'Quantity', 'Fee', 'VideoAmt', 'PhotoAmt', 'desc_length', 'average_word_length',
+        #             'magnitude', 'desc_words', 'score']
+        con_cols = ['Age', 'Quantity', 'Fee', 'VideoAmt', 'PhotoAmt']
         cat_cols = ['Type', 'Breed1', 'Breed2', 'Gender', 'Color1', 'Color2',
                     'Color3', 'MaturitySize', 'FurLength', 'Vaccinated', 'Dewormed',
                     'Sterilized', 'Health', 'State']
